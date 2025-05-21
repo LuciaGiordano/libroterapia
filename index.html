@@ -1,28 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libroterapia: Pausas. Lectura. Comunidad Encuentros con Propósito</title>
+    <title>Libroterapia: Pausas. Lectura. Comunidad. Encuentros con Propósito</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Application Structure Plan: A single-page application featuring a clear header, sticky navigation, and distinct sections for:
-        1.  'Qué es Libroterapia': Introduction and target audience.
-        2.  'Nuestros Servicios': Detailed breakdown of subscription benefits (Community, Reader Meetings, Book Club, Personalized Advice) using cards or an appealing list format.
-        3.  'Encuentros y Dinámica': Information on schedules, platform (Google Meet), participation flexibility, recording policy, and asynchronous participation (Google Groups).
-        4.  'Preguntas Frecuentes': An interactive accordion section addressing common queries from the PDF.
-        5.  'Inversión y Otros Servicios': Pricing for the monthly subscription and details on additional individual services.
-        6.  '¡Súmate!': A clear call to action.
-        This structure is chosen to guide the user logically from general information to specific details and finally to a conversion point (subscription). The interactive FAQ will enhance user experience by allowing them to quickly find answers.
-    -->
-    <!-- Visualization & Content Choices:
-        -   Introductory Text: Directly from PDF, summarized. Goal: Inform. Presentation: Paragraphs.
-        -   Services: List with descriptions. Goal: Inform. Presentation: Styled list/cards with Unicode icons. Interaction: None needed beyond reading.
-        -   Schedules/Platforms: Clear text. Goal: Inform. Presentation: Bullet points/paragraphs.
-        -   FAQs: Questions and Answers from PDF. Goal: Inform/Clarify. Presentation: Accordion (expand/collapse). Interaction: Click to reveal answer. Library: Vanilla JS.
-        -   Pricing/CTA: Clear text and button. Goal: Convert. Presentation: Prominent text and button. Interaction: Click (simulated link).
-        -   Unicode icons (e.g., 📚, 💬, 🗓️, 💡, ❓, 💲, ✨) will be used to visually support section titles and list items.
-        Justification: The chosen methods are suitable for presenting primarily textual information in an organized, digestible, and engaging manner. The accordion for FAQs is a standard and effective UI pattern.
-    -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -38,7 +20,7 @@
             padding-bottom: 0;
         }
         .faq-content.open {
-            max-height: 1000px; /* Adjusted for potentially longer FAQ answers */
+            max-height: 1000px;
             padding-top: 1rem;
             padding-bottom: 1rem;
         }
@@ -47,25 +29,30 @@
             scroll-behavior: smooth;
         }
         .service-card {
-            background-color: #ffffff; /* Blanco */
-            border-left: 4px solid #059669; /* Verde Seco (Emerald-600) */
+            background-color: #ffffff; 
+            border-left: 4px solid #059669; 
         }
         .section-title-icon {
             font-size: 1.75rem; 
             margin-right: 0.5rem;
         }
+        .logo-portada {
+            max-width: 300px; /* Ajusta este valor según el tamaño deseado para tu logo */
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
 </head>
-<body class="bg-stone-100 text-stone-800"> {/* Beige claro para el fondo del cuerpo */}
+<body class="bg-stone-100 text-stone-800">
 
-    <header class="bg-emerald-700 text-white py-8 shadow-lg"> {/* Verde Seco (Emerald-700) */}
+    <header class="bg-emerald-700 text-white py-8 shadow-lg">
         <div class="container mx-auto px-6 text-center">
             <h1 class="text-4xl md:text-5xl font-bold">Libroterapia</h1>
             <p class="mt-3 text-xl">Pausas. Lectura. Comunidad. Encuentros con Propósito.</p>
         </div>
     </header>
 
-    <nav class="sticky top-0 bg-white shadow-md z-50"> {/* Blanco para la navegación */}
+    <nav class="sticky top-0 bg-white shadow-md z-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-center items-center h-16">
                 <div class="flex space-x-2 sm:space-x-4">
@@ -82,21 +69,18 @@
 
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
 
-        <section id="hero-image" class="mb-12 scroll-mt-20">
-            <div class="bg-stone-100 p-3 md:p-4 rounded-xl shadow-lg text-center"> {/* Beige claro para el contenedor de la imagen */}
-                <img src="https://placehold.co/1200x400/8FBC8F/3A5A40?text=Imagen+Inspiradora+de+Libroterapia" 
-                     alt="Imagen inspiradora de Libroterapia" 
-                     class="w-full h-auto object-cover rounded-lg mx-auto max-h-[300px] md:max-h-[400px]"
-                     onerror="this.onerror=null; this.src='https://placehold.co/1200x400/E0E0E0/757575?text=Error+Al+Cargar+Imagen';">
-                <p class="text-xs sm:text-sm text-stone-500 mt-3">
-                    Esta es una imagen de ejemplo. Puedes reemplazarla subiendo tu propia imagen a un servicio de hosting (como Imgur, Postimages, etc.) y actualizando el enlace en el código HTML.
-                </p>
+        <section id="portada-logo" class="mb-12 text-center scroll-mt-20">
+            <div class="bg-white p-6 rounded-xl shadow-xl inline-block"> {/* Fondo blanco para el logo */}
+                <img src="https://i.imgur.com/nUj8S86.jpeg" 
+                     alt="Logo de Libroterapia" 
+                     class="logo-portada h-auto object-contain rounded-lg"
+                     onerror="this.onerror=null; this.src='https://placehold.co/300x300/8FBC8F/3A5A40?text=Logo+Libroterapia'; this.classList.add('p-4', 'bg-stone-200');">
             </div>
         </section>
 
         <section id="que-es" class="mb-16 scroll-mt-20">
             <h2 class="text-3xl font-semibold text-emerald-700 mb-6 text-center flex items-center justify-center"><span class="section-title-icon">💡</span>¿Qué es Libroterapia?</h2>
-            <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl max-w-3xl mx-auto"> {/* Blanco para el fondo de la tarjeta */}
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl max-w-3xl mx-auto">
                 <p class="text-lg text-stone-700 leading-relaxed mb-4">
                     Libroterapia es un espacio pensado tanto para quienes ya tienen el hábito de la lectura como para quienes desean comenzarlo. Aquí, cada persona encuentra su propia forma de habitar y conectar con los libros, sin exigencias ni ritmos obligatorios.
                 </p>
@@ -109,7 +93,7 @@
         <section id="servicios" class="mb-16 scroll-mt-20">
             <h2 class="text-3xl font-semibold text-emerald-700 mb-8 text-center flex items-center justify-center"><span class="section-title-icon">📚</span>Servicios Incluidos en la Suscripción</h2>
             <div class="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
-                <div class="service-card p-6 rounded-lg shadow-lg"> {/* Estilo definido en CSS: fondo blanco, borde verde seco */}
+                <div class="service-card p-6 rounded-lg shadow-lg">
                     <h3 class="text-xl font-semibold text-emerald-600 mb-2">Comunidad Libroterapia</h3>
                     <p class="text-stone-700">Grupo de WhatsApp para contenido exclusivo, información de encuentros y dinámicas para conocer tus opiniones y preferencias.</p>
                 </div>
@@ -130,7 +114,7 @@
 
         <section id="encuentros" class="mb-16 scroll-mt-20">
             <h2 class="text-3xl font-semibold text-emerald-700 mb-8 text-center flex items-center justify-center"><span class="section-title-icon">🗓️</span>Encuentros y Dinámica</h2>
-            <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl max-w-3xl mx-auto space-y-6"> {/* Blanco */}
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl max-w-3xl mx-auto space-y-6">
                 <div>
                     <h3 class="text-xl font-semibold text-emerald-600 mb-2">Horarios y Frecuencia:</h3>
                     <ul class="list-disc list-inside text-stone-700 space-y-1">
@@ -161,8 +145,8 @@
         <section id="faq" class="mb-16 scroll-mt-20">
             <h2 class="text-3xl font-semibold text-emerald-700 mb-8 text-center flex items-center justify-center"><span class="section-title-icon">❓</span>Preguntas Frecuentes</h2>
             <div class="space-y-4 max-w-3xl mx-auto">
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden"> {/* Blanco */}
-                    <button class="faq-button w-full text-left p-5 flex justify-between items-center bg-emerald-50 hover:bg-emerald-100 focus:outline-none"> {/* Verde Seco muy claro */}
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <button class="faq-button w-full text-left p-5 flex justify-between items-center bg-emerald-50 hover:bg-emerald-100 focus:outline-none">
                         <h3 class="text-lg font-semibold text-emerald-700">¿Necesito ser lector/a habitual para sumarme?</h3>
                         <span class="text-2xl text-emerald-700 transform transition-transform duration-300">&#9660;</span>
                     </button>
@@ -205,7 +189,7 @@
 
         <section id="inversion" class="mb-16 scroll-mt-20">
             <h2 class="text-3xl font-semibold text-emerald-700 mb-8 text-center flex items-center justify-center"><span class="section-title-icon">💲</span>Inversión y Otros Servicios</h2>
-            <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl max-w-3xl mx-auto space-y-6"> {/* Blanco */}
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl max-w-3xl mx-auto space-y-6">
                 <div>
                     <h3 class="text-2xl font-semibold text-emerald-600 mb-3">Suscripción Mensual:</h3>
                     <p class="text-3xl font-bold text-emerald-700 mb-2">$10.000 <span class="text-xl font-normal">(pesos argentinos)</span></p>
@@ -227,15 +211,18 @@
             <p class="text-lg text-stone-700 leading-relaxed max-w-xl mx-auto mb-8">
                 Si sientes que Libroterapia es para ti y quieres comenzar este viaje de descubrimiento y bienestar, ¡nos encantaría tenerte!
             </p>
-            <a href="#simulated-subscription-link" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-10 rounded-lg shadow-lg transition duration-300 inline-block text-lg transform hover:scale-105">
+            
+            <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c93808495d338d00195dc7361550609" 
+               target="_blank" rel="noopener noreferrer"
+               class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-10 rounded-lg shadow-lg transition duration-300 inline-block text-lg transform hover:scale-105">
                 ✨ ¡Quiero Suscribirme! ✨
             </a>
-             <p class="mt-4 text-sm text-stone-600">(Este botón simula el enlace de suscripción mencionado en el PDF)</p>
+            <p class="mt-4 text-sm text-stone-600">Haz clic en el botón para ir al enlace de suscripción.</p>
         </section>
 
     </main>
 
-    <footer class="bg-emerald-800 text-stone-100 py-10 mt-16"> {/* Verde Seco más oscuro para el footer, texto beige/blanco */}
+    <footer class="bg-emerald-800 text-stone-100 py-10 mt-16">
         <div class="container mx-auto px-6 text-center">
             <p>&copy; <span id="currentYear"></span> Libroterapia. Todos los derechos reservados.</p>
             <p class="text-sm mt-2">Inspirando bienestar a través de la lectura.</p>
@@ -276,7 +263,7 @@
                             e.preventDefault();
                             const navHeight = document.querySelector('nav').offsetHeight || 0;
                             const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                            const offsetPosition = elementPosition - navHeight - 20; // Adjusted offset for sticky nav
+                            const offsetPosition = elementPosition - navHeight - 20; 
 
                             window.scrollTo({
                                 top: offsetPosition,
