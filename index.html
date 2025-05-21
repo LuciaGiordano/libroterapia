@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libroterapia: Pausas. Lectura. Comunidad Encuentros con Propósito</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Application Structure Plan: A single-page application featuring a clear header, sticky navigation, and distinct sections for:
+        1.  'Qué es Libroterapia': Introduction and target audience.
+        2.  'Nuestros Servicios': Detailed breakdown of subscription benefits (Community, Reader Meetings, Book Club, Personalized Advice) using cards or an appealing list format.
+        3.  'Encuentros y Dinámica': Information on schedules, platform (Google Meet), participation flexibility, recording policy, and asynchronous participation (Google Groups).
+        4.  'Preguntas Frecuentes': An interactive accordion section addressing common queries from the PDF.
+        5.  'Inversión y Otros Servicios': Pricing for the monthly subscription and details on additional individual services.
+        6.  '¡Súmate!': A clear call to action.
+        This structure is chosen to guide the user logically from general information to specific details and finally to a conversion point (subscription). The interactive FAQ will enhance user experience by allowing them to quickly find answers.
+    -->
+    <!-- Visualization & Content Choices:
+        -   Introductory Text: Directly from PDF, summarized. Goal: Inform. Presentation: Paragraphs.
+        -   Services: List with descriptions. Goal: Inform. Presentation: Styled list/cards with Unicode icons. Interaction: None needed beyond reading.
+        -   Schedules/Platforms: Clear text. Goal: Inform. Presentation: Bullet points/paragraphs.
+        -   FAQs: Questions and Answers from PDF. Goal: Inform/Clarify. Presentation: Accordion (expand/collapse). Interaction: Click to reveal answer. Library: Vanilla JS.
+        -   Pricing/CTA: Clear text and button. Goal: Convert. Presentation: Prominent text and button. Interaction: Click (simulated link).
+        -   Unicode icons (e.g., 📚, 💬, 🗓️, 💡, ❓, 💲, ✨) will be used to visually support section titles and list items.
+        Justification: The chosen methods are suitable for presenting primarily textual information in an organized, digestible, and engaging manner. The accordion for FAQs is a standard and effective UI pattern.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .faq-button {
+            transition: background-color 0.3s ease;
+        }
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .faq-content.open {
+            max-height: 1000px; /* Adjusted for potentially longer FAQ answers */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        html {
+            scroll-behavior: smooth;
+        }
+        .service-card {
+            background-color: #ffffff; /* Blanco */
+            border-left: 4px solid #059669; /* Verde Seco (Emerald-600) */
+        }
+        .section-title-icon {
+            font-size: 1.75rem; 
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800"> {/* Beige claro para el fondo del cuerpo */}
+
+    <header class="bg-emerald-700 text-white py-8 shadow-lg"> {/* Verde Seco (Emerald-700) */}
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold">Libroterapia</h1>
+            <p class="mt-3 text-xl">Pausas. Lectura. Comunidad. Encuentros con Propósito.</p>
+        </div>
+    </header>
+
+    <nav class="sticky top-0 bg-white shadow-md z-50"> {/* Blanco para la navegación */}
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-center items-center h-16">
+                <div class="flex space-x-2 sm:space-x-4">
+                    <a href="#que-es" class="text-emerald-700 hover:bg-emerald-50 px-2 py-2 sm:px-3 rounded-md text-sm sm:text-base font-medium">¿Qué es?</a>
+                    <a href="#servicios" class="text-emerald-700 hover:bg-emerald-50 px-2 py-2 sm:px-3 rounded-md text-sm sm:text-base font-medium">Servicios</a>
+                    <a href="#encuentros" class="text-emerald-700 hover:bg-emerald-50 px-2 py-2 sm:px-3 rounded-md text-sm sm:text-base font-medium">Dinámica</a>
+                    <a href="#faq" class="text-emerald-700 hover:bg-emerald-50 px-2 py-2 sm:px-3 rounded-md text-sm sm:text-base font-medium">Preguntas</a>
+                    <a href="#inversion" class="text-emerald-700 hover:bg-emerald-50 px-2 py-2 sm:px-3 rounded-md text-sm sm:text-base font-medium">Inversión</a>
+                    <a href="#sumate" class="text-emerald-700 hover:bg-emerald-50 px-2 py-2 sm:px-3 rounded-md text-sm sm:text-base font-medium">¡Súmate!</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+        <section id="hero-image" class="mb-12 scroll-mt-20">
+            <div class="bg-stone-100 p-3 md:p-4 rounded-xl shadow-lg text-center"> {/* Beige claro para el contenedor de la imagen */}
+                <img src="https://placehold.co/1200x400/8FBC8F/3A5A40?text=Imagen+Inspiradora+de+Libroterapia" 
+                     alt="Imagen inspiradora de Libroterapia" 
+                     class="w-full h-auto object-cover rounded-lg mx-auto max-h-[300px] md:max-h-[400px]"
+                     onerror="this.onerror=null; this.src='https://placehold.co/1200x400/E0E0E0/757575?text=Error+Al+Cargar+Imagen';">
+                <p class="text-xs sm:text-sm text-stone-500 mt-3">
+                    Esta es una imagen de ejemplo. Puedes reemplazarla subiendo tu propia imagen a un servicio de hosting (como Imgur, Postimages, etc.) y actualizando el enlace en el código HTML.
+                </p>
+            </div>
+        </section>
+
+        <section id="que-es" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-semibold text-emerald-700 mb-6 text-center flex items-center justify-center"><span class="section-title-icon">💡</span>¿Qué es Libroterapia?</h2>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl max-w-3xl mx-auto"> {/* Blanco para el fondo de la tarjeta */}
+                <p class="text-lg text-stone-700 leading-relaxed mb-4">
+                    Libroterapia es un espacio pensado tanto para quienes ya tienen el hábito de la lectura como para quienes desean comenzarlo. Aquí, cada persona encuentra su propia forma de habitar y conectar con los libros, sin exigencias ni ritmos obligatorios.
+                </p>
+                <p class="text-lg text-stone-700 leading-relaxed">
+                    El objetivo es utilizar la lectura como una herramienta para conocernos, cuidarnos y crecer. Nos enfocamos en los aportes que los libros pueden ofrecernos para favorecer nuestra calidad de vida en lo cotidiano.
+                </p>
+            </div>
+        </section>
+
+        <section id="servicios" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-semibold text-emerald-700 mb-8 text-center flex items-center justify-center"><span class="section-title-icon">📚</span>Servicios Incluidos en la Suscripción</h2>
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
+                <div class="service-card p-6 rounded-lg shadow-lg"> {/* Estilo definido en CSS: fondo blanco, borde verde seco */}
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">Comunidad Libroterapia</h3>
+                    <p class="text-stone-700">Grupo de WhatsApp para contenido exclusivo, información de encuentros y dinámicas para conocer tus opiniones y preferencias.</p>
+                </div>
+                <div class="service-card p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">Encuentros de Lectores</h3>
+                    <p class="text-stone-700">Reuniones semanales para compartir experiencias con otras lecturas actuales o significativas. Un espacio para descubrir nuevas propuestas y seguir conociéndonos.</p>
+                </div>
+                <div class="service-card p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">Club de Lectura</h3>
+                    <p class="text-stone-700">Selección mensual de un libro (divulgación científica, psicología, desarrollo personal, etc.) por una Psicóloga Cognitivo-Conductual. Profundizamos en él compartiendo reflexiones y aplicaciones a la vida.</p>
+                </div>
+                <div class="service-card p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">Asesoramiento Personalizado</h3>
+                    <p class="text-stone-700">Recomendaciones de lecturas que acompañen tu momento vital, intereses y preferencias, desde una formación y experiencia como Psicóloga.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="encuentros" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-semibold text-emerald-700 mb-8 text-center flex items-center justify-center"><span class="section-title-icon">🗓️</span>Encuentros y Dinámica</h2>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl max-w-3xl mx-auto space-y-6"> {/* Blanco */}
+                <div>
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">Horarios y Frecuencia:</h3>
+                    <ul class="list-disc list-inside text-stone-700 space-y-1">
+                        <li><strong>Encuentros de Lectura:</strong> Martes 18:30 a 20:00 hs (frecuencia semanal).</li>
+                        <li><strong>Club de Lectura:</strong> Jueves 18:30 a 20:00 hs (frecuencia semanal, un libro por mes).</li>
+                        <li class="text-sm text-stone-600">A medida que la comunidad crezca, se incorporarán más alternativas horarias.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">Plataforma:</h3>
+                    <p class="text-stone-700">Utilizamos <strong>Google Meet</strong>. El enlace es siempre el mismo y se comparte en el grupo de WhatsApp.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">Participación:</h3>
+                    <p class="text-stone-700">La asistencia no es obligatoria. Puedes elegir qué servicios aprovechar. En los encuentros, cada presencia es valorada, permitiendo participar con cámara activa/inactiva, de forma activa o como observador.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">Grabaciones:</h3>
+                    <p class="text-stone-700">Los encuentros <strong>no se graban</strong> para fomentar un compartir genuino y en confianza, cuidando la intimidad. Se envían resúmenes por WhatsApp (sin información personal).</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">Participación Asincrónica:</h3>
+                    <p class="text-stone-700">Sí, mediante foros en <strong>Google Grupos</strong> para intercambiar información, citas, reflexiones y opiniones sobre el Club de Lectura y los Encuentros de Lectores. Puedes acceder cuando quieras o recibir notificaciones por email.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-semibold text-emerald-700 mb-8 text-center flex items-center justify-center"><span class="section-title-icon">❓</span>Preguntas Frecuentes</h2>
+            <div class="space-y-4 max-w-3xl mx-auto">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden"> {/* Blanco */}
+                    <button class="faq-button w-full text-left p-5 flex justify-between items-center bg-emerald-50 hover:bg-emerald-100 focus:outline-none"> {/* Verde Seco muy claro */}
+                        <h3 class="text-lg font-semibold text-emerald-700">¿Necesito ser lector/a habitual para sumarme?</h3>
+                        <span class="text-2xl text-emerald-700 transform transition-transform duration-300">&#9660;</span>
+                    </button>
+                    <div class="faq-content px-5 pb-5 text-stone-700 leading-relaxed">
+                        <p>No. Libroterapia está pensado tanto para quienes ya tienen el hábito como para quienes quieren empezarlo. No hay exigencias ni ritmo obligatorio. Cada quien encuentra su forma de habitar este espacio.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <button class="faq-button w-full text-left p-5 flex justify-between items-center bg-emerald-50 hover:bg-emerald-100 focus:outline-none">
+                        <h3 class="text-lg font-semibold text-emerald-700">¿Qué libros se leen?</h3>
+                        <span class="text-2xl text-emerald-700 transform transition-transform duration-300">&#9660;</span>
+                    </button>
+                    <div class="faq-content px-5 pb-5 text-stone-700 leading-relaxed">
+                        <p>En el Club de Lectura se seleccionan libros desde una formación como Psicóloga Cognitivo-Conductual (Terapias Contextuales) buscando obras que ayuden a conocernos, cuidarnos y crecer. Incluyen divulgación científica, psicología, desarrollo personal, salud integral, espiritualidad, historias de resiliencia y narrativa afín. En los Encuentros de Lectores, las temáticas son variadas según lo que cada uno comparta, ideal para descubrir nuevas propuestas.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <button class="faq-button w-full text-left p-5 flex justify-between items-center bg-emerald-50 hover:bg-emerald-100 focus:outline-none">
+                        <h3 class="text-lg font-semibold text-emerald-700">¿Puedo sumarme en cualquier momento?</h3>
+                        <span class="text-2xl text-emerald-700 transform transition-transform duration-300">&#9660;</span>
+                    </button>
+                    <div class="faq-content px-5 pb-5 text-stone-700 leading-relaxed">
+                        <p>Sí. Podés sumarte cuando quieras. No importa en qué parte del mes estés, siempre vas a encontrar un lugar desde donde empezar.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <button class="faq-button w-full text-left p-5 flex justify-between items-center bg-emerald-50 hover:bg-emerald-100 focus:outline-none">
+                        <h3 class="text-lg font-semibold text-emerald-700">¿Cómo es el grupo de WhatsApp?</h3>
+                        <span class="text-2xl text-emerald-700 transform transition-transform duration-300">&#9660;</span>
+                    </button>
+                    <div class="faq-content px-5 pb-5 text-stone-700 leading-relaxed">
+                        <p>Es un grupo cuidado, con contenido concreto y sin excesos. Se comparte: info sobre encuentros, resúmenes, mapas conceptuales del libro mensual y dinámicas simples para conocer opiniones.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="inversion" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-semibold text-emerald-700 mb-8 text-center flex items-center justify-center"><span class="section-title-icon">💲</span>Inversión y Otros Servicios</h2>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl max-w-3xl mx-auto space-y-6"> {/* Blanco */}
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-600 mb-3">Suscripción Mensual:</h3>
+                    <p class="text-3xl font-bold text-emerald-700 mb-2">$10.000 <span class="text-xl font-normal">(pesos argentinos)</span></p>
+                    <p class="text-stone-700">Incluye el acceso a todos los espacios y materiales: Comunidad Libroterapia (WhatsApp), Encuentros de Lectores, Club de Lectura y Asesoramiento personalizado de lecturas dentro del marco de la comunidad.</p>
+                </div>
+                <hr class="my-6 border-stone-300">
+                <div>
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">Servicios Adicionales (Fuera de Suscripción):</h3>
+                    <ul class="list-disc list-inside text-stone-700 space-y-2">
+                        <li><strong>Asesoramientos Individuales Puntuales:</strong> Al valor actual de las sesiones como psicóloga.</li>
+                        <li><strong>Acompañamiento Sostenido en Lectura:</strong> Para entrelazar los aportes de un libro elegido con tu historia singular, buscando una experiencia más profunda y transformadora. También al valor actual de las sesiones.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="sumate" class="text-center scroll-mt-20">
+            <h2 class="text-3xl font-semibold text-emerald-700 mb-4">"Un libro y tu presencia pueden hacer la diferencia. Justo a tiempo."</h2>
+            <p class="text-lg text-stone-700 leading-relaxed max-w-xl mx-auto mb-8">
+                Si sientes que Libroterapia es para ti y quieres comenzar este viaje de descubrimiento y bienestar, ¡nos encantaría tenerte!
+            </p>
+            <a href="#simulated-subscription-link" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-10 rounded-lg shadow-lg transition duration-300 inline-block text-lg transform hover:scale-105">
+                ✨ ¡Quiero Suscribirme! ✨
+            </a>
+             <p class="mt-4 text-sm text-stone-600">(Este botón simula el enlace de suscripción mencionado en el PDF)</p>
+        </section>
+
+    </main>
+
+    <footer class="bg-emerald-800 text-stone-100 py-10 mt-16"> {/* Verde Seco más oscuro para el footer, texto beige/blanco */}
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; <span id="currentYear"></span> Libroterapia. Todos los derechos reservados.</p>
+            <p class="text-sm mt-2">Inspirando bienestar a través de la lectura.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const faqButtons = document.querySelectorAll('.faq-button');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+            faqButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const arrow = button.querySelector('span');
+                    const isOpen = content.classList.toggle('open');
+                    
+                    if (isOpen) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        content.style.paddingTop = '1rem';
+                        content.style.paddingBottom = '1rem';
+                        arrow.style.transform = 'rotate(180deg)';
+                    } else {
+                        content.style.maxHeight = null;
+                        content.style.paddingTop = null;
+                        content.style.paddingBottom = null;
+                        arrow.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.startsWith('#') && href.length > 1) { 
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            e.preventDefault();
+                            const navHeight = document.querySelector('nav').offsetHeight || 0;
+                            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                            const offsetPosition = elementPosition - navHeight - 20; // Adjusted offset for sticky nav
+
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+    </script>
+
+</body>
+</html>
